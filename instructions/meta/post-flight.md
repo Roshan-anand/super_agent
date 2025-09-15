@@ -1,5 +1,5 @@
 ---
-description: Common Post-Flight Steps for Agent OS Instructions
+description: Common Post-Flight Steps for Super Agent Instructions
 globs:
 alwaysApply: false
 version: 1.0

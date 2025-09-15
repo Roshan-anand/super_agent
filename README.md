@@ -13,4 +13,9 @@ Use it with:
 
 ✅ Any language or framework.
 
+To setup in your project run : 
+```
+curl -sSL https://raw.githubusercontent.com/Roshan-anand/super_agent/refs/heads/master/setup/project.sh | bash
+```
+
 ---

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Agent OS Project Installation Script
-# This script installs Agent OS in a project directory
+# Super Agent Project Installation Script
+# This script installs Super Agent in a project directory
 
 set -e  # Exit on error
 
@@ -34,7 +34,7 @@ while [[ $# -gt 0 ]]; do
             echo "Usage: $0 [OPTIONS]"
             echo ""
             echo "Options:"
-            echo "  --no-base                   Install from GitHub (not from a base Agent OSinstallation on your system)"
+            echo "  --no-base                   Install from GitHub (not from a base Super Agent installation on your system)"
             echo "  --overwrite-instructions    Overwrite existing instruction files"
             echo "  --overwrite-standards       Overwrite existing standards files"
             echo "  --project-type=TYPE         Use specific project type for installation"
@@ -51,16 +51,16 @@ while [[ $# -gt 0 ]]; do
 done
 
 echo ""
-echo "🚀 Agent OS Project Installation"
+echo "🚀 Super Agent Project Installation"
 echo "================================"
 echo ""
 
 # Get project directory info
 CURRENT_DIR=$(pwd)
 PROJECT_NAME=$(basename "$CURRENT_DIR")
-INSTALL_DIR="./.agent-os"
+INSTALL_DIR="./.super-agent"
 
-echo "📍 Installing Agent OS to this project's root directory ($PROJECT_NAME)"
+echo "📍 Installing Super Agent to this project's root directory ($PROJECT_NAME)"
 echo ""
 
 # Determine if running from base installation or GitHub
@@ -68,18 +68,18 @@ if [ "$NO_BASE" = true ]; then
     IS_FROM_BASE=false
     echo "📦 Installing directly from GitHub (no base installation)"
     # Set BASE_URL for GitHub downloads
-    BASE_URL="https://raw.githubusercontent.com/buildermethods/agent-os/main"
+    BASE_URL="https://raw.githubusercontent.com/Roshan-anand/super_agent/"
     # Download and source functions when running from GitHub
-    TEMP_FUNCTIONS="/tmp/agent-os-functions-$$.sh"
+    TEMP_FUNCTIONS="/tmp/super-agent-functions-$$.sh"
     curl -sSL "${BASE_URL}/setup/functions.sh" -o "$TEMP_FUNCTIONS"
     source "$TEMP_FUNCTIONS"
     rm "$TEMP_FUNCTIONS"
 else
     IS_FROM_BASE=true
-    # Get the base Agent OS directory
+    # Get the base Super Agent directory
     SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-    BASE_AGENT_OS="$(dirname "$SCRIPT_DIR")"
-    echo "✓ Using Agent OS base installation at $BASE_AGENT_OS"
+    BASE_SUPER_AGENT="$(dirname "$SCRIPT_DIR")"
+    echo "✓ Using Super Agent base installation at $BASE_SUPER_AGENT"
     # Source shared functions from base installation
     source "$SCRIPT_DIR/functions.sh"
 fi
@@ -92,9 +92,9 @@ mkdir -p "$INSTALL_DIR"
 # Configure tools and project type based on installation type
 if [ "$IS_FROM_BASE" = true ]; then
     # Read project type from config or use flag
-    if [ -z "$PROJECT_TYPE" ] && [ -f "$BASE_AGENT_OS/config.yml" ]; then
+    if [ -z "$PROJECT_TYPE" ] && [ -f "$BASE_SUPER_AGENT/config.yml" ]; then
         # Try to read default_project_type from config
-        PROJECT_TYPE=$(grep "^default_project_type:" "$BASE_AGENT_OS/config.yml" | cut -d' ' -f2 | tr -d ' ')
+        PROJECT_TYPE=$(grep "^default_project_type:" "$BASE_SUPER_AGENT/config.yml" | cut -d' ' -f2 | tr -d ' ')
         if [ -z "$PROJECT_TYPE" ]; then
             PROJECT_TYPE="default"
         fi
@@ -110,14 +110,14 @@ if [ "$IS_FROM_BASE" = true ]; then
     STANDARDS_SOURCE=""
 
     if [ "$PROJECT_TYPE" = "default" ]; then
-        INSTRUCTIONS_SOURCE="$BASE_AGENT_OS/instructions"
-        STANDARDS_SOURCE="$BASE_AGENT_OS/standards"
+        INSTRUCTIONS_SOURCE="$BASE_SUPER_AGENT/instructions"
+        STANDARDS_SOURCE="$BASE_SUPER_AGENT/standards"
     else
         # Look up project type in config
-        if grep -q "^  $PROJECT_TYPE:" "$BASE_AGENT_OS/config.yml"; then
+        if grep -q "^  $PROJECT_TYPE:" "$BASE_SUPER_AGENT/config.yml"; then
             # Extract paths for this project type
-            INSTRUCTIONS_PATH=$(awk "/^  $PROJECT_TYPE:/{f=1} f&&/instructions:/{print \$2; exit}" "$BASE_AGENT_OS/config.yml")
-            STANDARDS_PATH=$(awk "/^  $PROJECT_TYPE:/{f=1} f&&/standards:/{print \$2; exit}" "$BASE_AGENT_OS/config.yml")
+            INSTRUCTIONS_PATH=$(awk "/^  $PROJECT_TYPE:/{f=1} f&&/instructions:/{print \$2; exit}" "$BASE_SUPER_AGENT/config.yml")
+            STANDARDS_PATH=$(awk "/^  $PROJECT_TYPE:/{f=1} f&&/standards:/{print \$2; exit}" "$BASE_SUPER_AGENT/config.yml")
 
             # Expand tilde in paths
             INSTRUCTIONS_SOURCE=$(eval echo "$INSTRUCTIONS_PATH")
@@ -126,13 +126,13 @@ if [ "$IS_FROM_BASE" = true ]; then
             # Check if paths exist
             if [ ! -d "$INSTRUCTIONS_SOURCE" ] || [ ! -d "$STANDARDS_SOURCE" ]; then
                 echo "  ⚠️  Project type '$PROJECT_TYPE' paths not found, falling back to default instructions and standards"
-                INSTRUCTIONS_SOURCE="$BASE_AGENT_OS/instructions"
-                STANDARDS_SOURCE="$BASE_AGENT_OS/standards"
+                INSTRUCTIONS_SOURCE="$BASE_SUPER_AGENT/instructions"
+                STANDARDS_SOURCE="$BASE_SUPER_AGENT/standards"
             fi
         else
             echo "  ⚠️  Project type '$PROJECT_TYPE' not found in config, using default instructions and standards"
-            INSTRUCTIONS_SOURCE="$BASE_AGENT_OS/instructions"
-            STANDARDS_SOURCE="$BASE_AGENT_OS/standards"
+            INSTRUCTIONS_SOURCE="$BASE_SUPER_AGENT/instructions"
+            STANDARDS_SOURCE="$BASE_SUPER_AGENT/standards"
         fi
     fi
 
@@ -158,11 +158,11 @@ fi
 
 # Success message
 echo ""
-echo "✅ Agent OS has been installed in your project ($PROJECT_NAME)!"
+echo "✅ Super Agent has been installed in your project ($PROJECT_NAME)!"
 echo ""
 echo "📍 Project-level files installed to:"
-echo "   .agent-os/instructions/    - Agent OS instructions"
-echo "   .agent-os/standards/       - Development standards"
+echo "   .super-agent/instructions/    - Super Agent instructions"
+echo "   .super-agent/standards/       - Development standards"
 echo ""
 echo "--------------------------------"
 echo ""
@@ -170,8 +170,8 @@ echo "Next steps:"
 echo ""
 echo "--------------------------------"
 echo ""
-echo "Refer to the official Agent OS docs at:"
-echo "https://buildermethods.com/agent-os"
+echo "Refer to the official Super Agent docs at:"
+echo "https://buildermethods.com/super-agent"
 echo ""
 echo "Keep building! 🚀"
 echo ""

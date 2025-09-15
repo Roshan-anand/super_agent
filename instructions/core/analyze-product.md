@@ -1,19 +1,19 @@
 ---
-description: Analyze Current Product & Install Agent OS
+description: Analyze Current Product & Install Super Agent
 globs:
 alwaysApply: false
 version: 1.0
 encoding: UTF-8
 ---
 
-# Analyze Current Product & Install Agent OS
+# Analyze Current Product & Install Super Agent
 
 ## Overview
 
-Install Agent OS into an existing codebase, analyze current product state and progress.  Builds on plan-product.md
+Install Super Agent into an existing codebase, analyze current product state and progress.  Builds on plan-product.md
 
 <pre_flight_check>
-  EXECUTE: @.agent-os/instructions/meta/pre-flight.md
+  EXECUTE: @.super_agent/instructions/meta/pre-flight.md
 </pre_flight_check>
 
 <process_flow>
@@ -70,7 +70,7 @@ Use the context-fetcher subagent to supplement codebase analysis with business c
 <context_questions>
   Based on my analysis of your codebase, I can see you're building [OBSERVED_PRODUCT_TYPE].
 
-  To properly set up Agent OS, I need to understand:
+  To properly set up Super Agent, I need to understand:
 
   1. **Product Vision**: What problem does this solve? Who are the target users?
 
@@ -93,7 +93,7 @@ Use the context-fetcher subagent to supplement codebase analysis with business c
 
 ### Step 3: Execute Plan-Product with Context
 
-Execute our standard flow for installing Agent OS in existing products
+Execute our standard flow for installing Super Agent in existing products
 
 <execution_parameters>
   <main_idea>[DERIVED_FROM_ANALYSIS_AND_USER_INPUT]</main_idea>
@@ -103,9 +103,9 @@ Execute our standard flow for installing Agent OS in existing products
 </execution_parameters>
 
 <execution_prompt>
-  @.agent-os/instructions/core/plan-product.md
+  @.super_agent/instructions/core/plan-product.md
 
-  I'm installing Agent OS into an existing product. Here's what I've gathered:
+  I'm installing Super Agent into an existing product. Here's what I've gathered:
 
   **Main Idea**: [SUMMARY_FROM_ANALYSIS_AND_CONTEXT]
 
@@ -121,7 +121,7 @@ Execute our standard flow for installing Agent OS in existing products
 <instructions>
   ACTION: Execute plan-product.md with gathered information
   PROVIDE: All context as structured input
-  ALLOW: plan-product.md to create .agent-os/product/ structure
+  ALLOW: plan-product.md to create .super_agent/product/ structure
 </instructions>
 
 </step>
@@ -168,19 +168,19 @@ Refine the generated documentation to ensure accuracy for the existing product b
 
 ### Step 5: Final Verification and Summary
 
-Verify installation completeness and provide clear next steps for the user to start using Agent OS with their existing codebase.
+Verify installation completeness and provide clear next steps for the user to start using Super Agent with their existing codebase.
 
 <verification_checklist>
-  - [ ] .agent-os/product/ directory created
+  - [ ] .super_agent/product/ directory created
   - [ ] All product documentation reflects actual codebase
   - [ ] Roadmap shows completed and planned features accurately
   - [ ] Tech stack matches installed dependencies
 </verification_checklist>
 
 <summary_template>
-  ## ✅ Agent OS Successfully Installed
+  ## ✅ Super Agent Successfully Installed
 
-  I've analyzed your [PRODUCT_TYPE] codebase and set up Agent OS with documentation that reflects your actual implementation.
+  I've analyzed your [PRODUCT_TYPE] codebase and set up Super Agent with documentation that reflects your actual implementation.
 
   ### What I Found
 
@@ -191,21 +191,21 @@ Verify installation completeness and provide clear next steps for the user to st
 
   ### What Was Created
 
-  - ✓ Product documentation in `.agent-os/product/`
+  - ✓ Product documentation in `.super_agent/product/`
   - ✓ Roadmap with completed work in Phase 0
   - ✓ Tech stack reflecting actual dependencies
 
   ### Next Steps
 
-  1. Review the generated documentation in `.agent-os/product/`
+  1. Review the generated documentation in `.super_agent/product/`
   2. Make any necessary adjustments to reflect your vision
-  3. See the Agent OS README for usage instructions: https://github.com/buildermethods/agent-os
-  4. Start using Agent OS for your next feature:
+  3. See the Super Agent README for usage instructions: https://github.com/buildermethods/super_agent
+  4. Start using Super Agent for your next feature:
      ```
-     @.agent-os/instructions/core/create-spec.md
+     @.super_agent/instructions/core/create-spec.md
      ```
 
-  Your codebase is now Agent OS-enabled! 🚀
+  Your codebase is now Super Agent-enabled! 🚀
 </summary_template>
 
 
@@ -214,5 +214,5 @@ Verify installation completeness and provide clear next steps for the user to st
 </process_flow>
 
 <post_flight_check>
-  EXECUTE: @.agent-os/instructions/meta/post-flight.md
+  EXECUTE: @.super_agent/instructions/meta/post-flight.md
 </post_flight_check>
